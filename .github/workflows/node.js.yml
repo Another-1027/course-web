@@ -72,11 +72,11 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
           PROJECT_NAME: course-web
-          NEW_IMAGE_NAME: ${{ ECR_REGISTRY }}/${{ ECR_REPOSITORY }}:${{ PROJECT_NAME }}-${{ IMAGE_TAG }}
+          # NEW_IMAGE_NAME: ${{ ECR_REGISTRY }}/${{ ECR_REPOSITORY }}:${{ PROJECT_NAME }}-${{ IMAGE_TAG }}
         run: |
-          docker build -t $NEW_IMAGE_NAME .
-          docker push $NEW_IMAGE_NAME
-          echo "image=$NEW_IMAGE_NAME" >> "$GITHUB_OUTPUT"
+          docker build -t$ECR_REGISTRY/$ECR_REPOSITORY:$PROJECT_NAME-$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$PROJECT_NAME-$IMAGE_TAG
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$PROJECT_NAME-$IMAGE_TAG" >> "$GITHUB_OUTPUT"
  
       - name: AWS SSM Send-Command
         uses: peterkimzz/aws-ssm-send-command@master
@@ -89,5 +89,5 @@ jobs:
           working-directory: /root
           command: |
             export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-            sed -i 's|image:.*|image: $NEW_IMAGE_NAME|g' course-web/course-web.yaml
+            sed -i 's|image:.*|image: $image|g' course-web/course-web.yaml
             kubectl apply -f course-web/ >test
