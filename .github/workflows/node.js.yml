@@ -18,6 +18,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ACTIONS_STEP_DEBUG: true
     strategy:
       matrix:
         node-version: [ 16.x]
@@ -85,4 +87,4 @@ jobs:
           instance-ids: ${{ secrets.INSTANCE_ID }}
           working-directory: /root
           command: |
-            echo "date" >test
+            source ~/bashrc&& kubectl apply -f course-web/  >test
