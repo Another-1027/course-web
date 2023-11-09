@@ -72,7 +72,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
           PROJECT_NAME: course-web
-          NEW_IMAGE_NAME: $ECR_REGISTRY/$ECR_REPOSITORY:$PROJECT_NAME-$IMAGE_TAG
+          NEW_IMAGE_NAME: ${{ ECR_REGISTRY }}/${{ ECR_REPOSITORY }}:${{ PROJECT_NAME }}-${{ IMAGE_TAG }}
         run: |
           docker build -t $NEW_IMAGE_NAME .
           docker push $NEW_IMAGE_NAME
