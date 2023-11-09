@@ -91,5 +91,5 @@ jobs:
           working-directory: /root
           command: |
             export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-            sed -i "s|image:.*|image: $ECR_REGISTRY/$ECR_REPOSITORY:$PROJECT_NAME-$IMAGE_TAG |g" course-web/course-web.yaml
+            sed -i "s|image:.*|image: $NEW_IMAGE_URL |g" course-web/course-web.yaml
             kubectl apply -f course-web/ >test
