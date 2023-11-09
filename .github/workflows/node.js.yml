@@ -90,4 +90,4 @@ jobs:
           command: |
             export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
             sed -i "s|image:.*|image: ${{ steps.build-course-web-image.outputs.image }} |g" course-web/course-web.yaml
-            kubectl apply -f course-web/
+            kubectl apply -f course-web/ 
