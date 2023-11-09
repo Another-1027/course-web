@@ -88,4 +88,5 @@ jobs:
           working-directory: /root
           command: |
             export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+            sed -i 's|image:.*|image: new_image_address|g' course-web/course-web.yaml
             kubectl apply -f course-web/ >test
