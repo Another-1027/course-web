@@ -87,4 +87,5 @@ jobs:
           instance-ids: ${{ secrets.INSTANCE_ID }}
           working-directory: /root
           command: |
-            source ~/bashrc&& kubectl apply -f course-web/  >test
+            export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+            kubectl apply -f course-web/ >test
