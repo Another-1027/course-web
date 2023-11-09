@@ -85,6 +85,4 @@ jobs:
           instance-ids: ${{ secrets.INSTANCE_ID }}
           working-directory: /root
           command: |
-            . /root/.bashrc
-            cd /root/course-web
-            kubectl apply -f ./
+            echo "date" >test
