@@ -88,6 +88,3 @@ jobs:
             . /root/.bashrc
             cd /root/course-web
             kubectl apply -f ./
-            
-      - name: Get the outputs
-        run: echo "The Command id is ${{ steps.deploy-course-web-ssm.outputs.command-id }}"
